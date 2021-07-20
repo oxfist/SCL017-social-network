@@ -6,7 +6,7 @@
 
 import { homeContent } from './views/home.js';
 import { aboutContent } from './views/about.js';
-import { changeRoute } from './lib/router.js';
+import { router } from './lib/router.js';
 
 const rootDiv = document.getElementById('root');
 
@@ -19,7 +19,7 @@ if (currentPath === '/') {
 
 window.addEventListener('hashchange', () => {
   const hash = window.location.hash;
-  changeRoute(hash);
+  router.changeRoute(hash);
   if (hash === '#home') {
     rootDiv.innerHTML = homeContent;
   } else if (hash === '#about') {
