@@ -1,5 +1,7 @@
-// Este es el punto de entrada de tu aplicacion
+const changeRoute = (hash) => {
+  console.log(`cambiar a ruta seleccionada ${hash}`);
+};
 
-import { myFunction } from './lib/index.js';
-
-myFunction();
+window.addEventListener('hashchange', () => {
+  changeRoute(window.location.hash);
+});
