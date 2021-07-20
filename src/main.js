@@ -31,3 +31,11 @@ const changeRoute = (hash) => {
 window.addEventListener('hashchange', () => {
   changeRoute(window.location.hash);
 });
+
+window.onpopstate = () => {
+  if (window.location.pathname === '/') {
+    rootDiv.innerHTML = homeContent;
+  } else if (window.location.pathname === '/about') {
+    rootDiv.innerHTML = aboutContent;
+  }
+};
