@@ -8,29 +8,25 @@ import { homeContent } from './views/home.js';
 import { aboutContent } from './views/about.js';
 import { router } from './lib/router.js';
 
-const routes = {
+const linkContent = {
   '#home': homeContent,
   '#about': aboutContent,
+};
+const routes = {
+  '/': homeContent,
+  '/about': aboutContent,
 };
 const rootDiv = document.getElementById('root');
 
 const currentPath = window.location.pathname;
-if (currentPath === '/') {
-  rootDiv.innerHTML = homeContent;
-} else if (currentPath === '/about') {
-  rootDiv.innerHTML = aboutContent;
-}
+rootDiv.innerHTML = routes[currentPath];
 
 window.addEventListener('hashchange', () => {
-  const hash = window.location.hash;
-  router.changeRoute(hash);
-  rootDiv.innerHTML = routes[hash];
+  const selectedLink = window.location.hash;
+  router.changeRoute(selectedLink);
+  rootDiv.innerHTML = linkContent[selectedLink];
 });
 
 window.onpopstate = () => {
-  if (window.location.pathname === '/') {
-    rootDiv.innerHTML = homeContent;
-  } else if (window.location.pathname === '/about') {
-    rootDiv.innerHTML = aboutContent;
-  }
+  rootDiv.innerHTML = routes[window.location.pathname];
 };
