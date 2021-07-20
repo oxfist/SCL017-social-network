@@ -4,10 +4,11 @@
 // 2. Mostrar HTML correcto al recargar la página
 // 3. Mostrar HTML correcto al moverse con botones Atrás y Adelante del navegador
 
-const rootDiv = document.getElementById('root');
+import { homeContent } from './views/home.js';
+import { aboutContent } from './views/about.js';
+import { changeRoute } from './lib/router.js';
 
-const homeContent = '<h1>Inicio</h1>';
-const aboutContent = '<h1>Acerca de</h1>';
+const rootDiv = document.getElementById('root');
 
 const currentPath = window.location.pathname;
 if (currentPath === '/') {
@@ -16,20 +17,14 @@ if (currentPath === '/') {
   rootDiv.innerHTML = aboutContent;
 }
 
-const changeRoute = (hash) => {
-  if (hash === '#home') {
-    console.log('mostrar home');
-    rootDiv.innerHTML = homeContent;
-    window.history.replaceState({}, 'home', '/');
-  } else if (hash === '#about') {
-    console.log('mostrar about');
-    rootDiv.innerHTML = aboutContent;
-    window.history.replaceState({}, 'about', '/about');
-  }
-};
-
 window.addEventListener('hashchange', () => {
-  changeRoute(window.location.hash);
+  const hash = window.location.hash;
+  changeRoute(hash);
+  if (hash === '#home') {
+    rootDiv.innerHTML = homeContent;
+  } else if (hash === '#about') {
+    rootDiv.innerHTML = aboutContent;
+  }
 });
 
 window.onpopstate = () => {
