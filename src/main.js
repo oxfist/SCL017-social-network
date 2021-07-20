@@ -8,6 +8,10 @@ import { homeContent } from './views/home.js';
 import { aboutContent } from './views/about.js';
 import { router } from './lib/router.js';
 
+const routes = {
+  '#home': homeContent,
+  '#about': aboutContent,
+};
 const rootDiv = document.getElementById('root');
 
 const currentPath = window.location.pathname;
@@ -20,11 +24,7 @@ if (currentPath === '/') {
 window.addEventListener('hashchange', () => {
   const hash = window.location.hash;
   router.changeRoute(hash);
-  if (hash === '#home') {
-    rootDiv.innerHTML = homeContent;
-  } else if (hash === '#about') {
-    rootDiv.innerHTML = aboutContent;
-  }
+  rootDiv.innerHTML = routes[hash];
 });
 
 window.onpopstate = () => {
