@@ -28,7 +28,8 @@ const changeRoute = (hash) => {
 
 // Cambiar HTML al clickear links (1)
 window.addEventListener('hashchange', () => {
-  changeRoute(window.location.hash);
+  const hash = window.location.hash;
+  changeRoute(hash);
   if (hash === '#home') {
     console.log('mostrar home');
     rootDiv.innerHTML = homeContent;
